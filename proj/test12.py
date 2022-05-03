@@ -3,6 +3,14 @@ import pandas as pd
 import numpy as np
 from tkinter import ttk
 
+df1 = pd.read_csv('slovarikkkk.txt','\t', on_bad_lines='skip')
+zap1 = df1.iloc[:, [0]]
+ot1 = df1.iloc[:, [1]]
+
+df2 = pd.read_csv("EN1.csv", encoding='utf-8', on_bad_lines='skip')
+ot2 = df2.loc[2::2, ['a few']] #russ
+zap2 = df2.loc[1::2, ['a few']] #en1
+
 root = tk.Tk()
 
 k = ''
@@ -10,18 +18,12 @@ bad = 1
 
 def zaprosta():
     if k == "Толкование":    
-        df = pd.read_csv('slovarikkkk.txt','\t', on_bad_lines='skip')
-        zap = df.iloc[:, [0]]
-        ot = df.iloc[:, [1]]
-        ot = ot.values
-        zp = zap.values
+        ot = ot1.values
+        zp = zap1.values
 
     if k == "Перевод":
-        df = pd.read_csv("EN1.csv", encoding='utf-8', on_bad_lines='skip')
-        ot = df.loc[2::2, ['a few']] #russ
-        zap = df.loc[1::2, ['a few']] #en1
-        ot = ot.values
-        zp = zap.values
+        ot = ot2.values
+        zp = zap2.values
         
     def search(lst, item):
         low = 0
